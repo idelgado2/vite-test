@@ -12,6 +12,10 @@ function App() {
     );
   }
 
+  function setDeleteTodos(id: number) {
+    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+  }
+
   function addTodo(title: string) {
     setTodos((prevTodos) => [
       {
@@ -34,6 +38,7 @@ function App() {
               key={todo.id}
               todo={todo}
               onCompletedChange={setTodoCompleted}
+              onDeleteTodo={(id) => () => setDeleteTodos(id)}
             />
           ))}
         </div>

@@ -1,11 +1,17 @@
+import { MouseEventHandler } from "react";
 import { Todo } from "../types/todo";
 
 interface TodoItemProps {
   todo: Todo;
   onCompletedChange: (id: number, completed: boolean) => void;
+  onDeleteTodo: (id: number) => MouseEventHandler<HTMLButtonElement>;
 }
 
-export default function TodoItem({ todo, onCompletedChange }: TodoItemProps) {
+export default function TodoItem({
+  todo,
+  onCompletedChange,
+  onDeleteTodo,
+}: TodoItemProps) {
   return (
     <div>
       <label className="flex items-center gap-2 border rounded-md p-2 border-gray-400 bg-white hover:bg-slate-50">
@@ -19,6 +25,7 @@ export default function TodoItem({ todo, onCompletedChange }: TodoItemProps) {
           {todo.title}
         </span>
       </label>
+      <button onClick={onDeleteTodo(todo.id)}>delete</button>
     </div>
   );
 }
