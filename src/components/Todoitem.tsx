@@ -1,20 +1,20 @@
-import { MouseEventHandler } from "react";
 import { Todo } from "../types/todo";
+import { Trash2 } from "lucide-react";
 
 interface TodoItemProps {
   todo: Todo;
   onCompletedChange: (id: number, completed: boolean) => void;
-  onDeleteTodo: (id: number) => MouseEventHandler<HTMLButtonElement>;
+  onDelete: (id: number) => void;
 }
 
 export default function TodoItem({
   todo,
   onCompletedChange,
-  onDeleteTodo,
+  onDelete,
 }: TodoItemProps) {
   return (
-    <div>
-      <label className="flex items-center gap-2 border rounded-md p-2 border-gray-400 bg-white hover:bg-slate-50">
+    <div className="flex items-center gap-1">
+      <label className="flex grow items-center gap-2 border rounded-md p-2 border-gray-400 bg-white hover:bg-slate-50">
         <input
           type="checkbox"
           className="scale-125"
@@ -25,7 +25,9 @@ export default function TodoItem({
           {todo.title}
         </span>
       </label>
-      <button onClick={onDeleteTodo(todo.id)}>delete</button>
+      <button className="p-2" onClick={() => onDelete(todo.id)}>
+        <Trash2 size={20} className="text-gray-500" />
+      </button>
     </div>
   );
 }
